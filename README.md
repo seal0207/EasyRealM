@@ -9,7 +9,7 @@
 
 2.因才接触shell三天，因为写的太烂不好意思给大家看，刚上路不想因为代码写的垃圾被喷打击自信心~
 
-3.软件具体效果以及出现问题啥的请反馈作者 * [issue~]https://github.com/zhboner/realm/issues
+3.软件具体效果以及出现问题啥的请反馈作者 * [issue~](https://github.com/zhboner/realm/issues)
 
 4.软件安装及配置文件路径/etc/realm
 
