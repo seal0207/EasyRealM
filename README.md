@@ -3,7 +3,7 @@
 ![image](https://mxpic.ml/2021/01/23/20210123_704052f0f88df.png)
 ## 使用方法
 一键脚本：
-`wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/blob/main/realm.sh && chmod +x realm.sh && ./realm.sh`
+`wget -N --no-check-certificate https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm.sh && ./realm.sh`
 ### 啰嗦一句
 1.脚本已取消加密。里头每个功能都注释的很清楚，不存在任何安全问题，请放心使用。添加规则为拼凑的逻辑很烂有大佬愿意指导可以协助修改！~
 
