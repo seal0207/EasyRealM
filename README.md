@@ -5,7 +5,7 @@
 一键脚本：
 `wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/blob/main/realm.sh && chmod +x realm.sh && ./realm.sh`
 ### 啰嗦一句
-1.脚本已加密，怕有问题就别用~ OK？
+1.脚本已取消加密。
 
 2.因才接触shell三天，因为写的太烂不好意思给大家看，刚上路不想因为代码写的垃圾被喷打击自信心~
 
