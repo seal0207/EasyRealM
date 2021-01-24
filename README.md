@@ -7,3 +7,4 @@
 脚本已加密，因为写的太烂不好意思给大家看，怕有问题就别用~ OK？
 ### RealM作者：
 https://zhb.me/realm
+https://github.com/zhboner/realm
