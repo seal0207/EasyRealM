@@ -26,7 +26,7 @@ check_status(){
 #安装RealM
 Install_RealM(){
 mkdir /etc/realm
-wget -N --no-check-certificate https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm && mv realm /etc/realm
+wget -N --no-check-certificate https://github.com/zhboner/realm/releases/download/v1.2.0/realm && chmod +x realm && mv realm /etc/realm
 echo '
 {
     "listening_addresses": ["0.0.0.0"],
