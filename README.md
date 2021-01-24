@@ -6,10 +6,15 @@
 `wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/blob/main/realm.sh && chmod +x realm && ./realm.sh`
 ### 啰嗦一句
 1.脚本已加密，怕有问题就别用~ OK？
+
 2.因才接触shell三天，因为写的太烂不好意思给大家看
+
 3.软件具体效果以及出现问题啥的请反馈作者issue~
+
 4.软件安装路径/etc/realm
+
 5.后续作者更新使用规则不保证继续更新，因为我也是小白！
+
 ### RealM作者：
 https://zhb.me/realm 
 
