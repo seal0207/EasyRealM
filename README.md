@@ -3,7 +3,7 @@
 ![image](https://mxpic.ml/2021/01/23/20210123_704052f0f88df.png)
 ## 使用方法
 一键脚本：
-`wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/blob/main/realm.sh && chmod +x realm && ./realm.sh`
+`wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/blob/main/realm.sh && chmod +x realm.sh && ./realm.sh`
 ### 啰嗦一句
 1.脚本已加密，怕有问题就别用~ OK？
 
