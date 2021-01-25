@@ -241,7 +241,19 @@ start_menu
 }
 #删除RealM转发规则
 Delete_RealM(){
-Check_RealM
+    echo -e "                      RealM 配置                        "
+    echo -e "--------------------------------------------------------"
+    echo -e "序号|本地端口\t|转发地址:转发端口"
+    echo -e "--------------------------------------------------------"
+
+    count_line=$(awk 'END{print NR}' $raw_conf_path)
+    for((i=1;i<=$count_line;i++))
+    do
+        trans_conf=$(sed -n "${i}p" $raw_conf_path)
+        eachconf_retrieve
+        echo -e " $i  |$listening_ports\t|$remote_addresses:$remote_ports"
+        echo -e "--------------------------------------------------------"
+    done
 read -p "请输入你要删除的配置编号：" numdelete
 sed -i "${numdelete}d" $raw_conf_path
 rm -rf /etc/realm/config.json
