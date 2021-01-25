@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
 
-sh_ver="1.0.1"
+sh_ver="1.0.0"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -272,6 +272,8 @@ Check_RealM
 read -p "输入任意键按回车返回主菜单"
 start_menu
 }
+
+
 #更新脚本
 Update_Shell(){
 	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
@@ -282,7 +284,7 @@ Update_Shell(){
 		read -p "(默认: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
-			https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm.sh
+			wget -N --no-check-certificate https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm.sh
 			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
 		else
 			echo && echo "	已取消..." && echo
