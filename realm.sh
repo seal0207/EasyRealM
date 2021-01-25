@@ -22,7 +22,7 @@ check_status(){
         echo "------------------------------"
     fi
 }
-
+ 
 #安装RealM
 Install_RealM(){
 mkdir /etc/realm
