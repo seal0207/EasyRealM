@@ -22,7 +22,7 @@ check_status(){
         echo "------------------------------"
     fi
 }
- 
+
 #安装RealM
 Install_RealM(){
 mkdir /etc/realm
@@ -272,6 +272,26 @@ Check_RealM
 read -p "输入任意键按回车返回主菜单"
 start_menu
 }
+#更新脚本
+Update_Shell(){
+	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
+	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
+	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && start_menu
+	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
+		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
+		read -p "(默认: y):" yn
+		[[ -z "${yn}" ]] && yn="y"
+		if [[ ${yn} == [Yy] ]]; then
+			https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm.sh
+			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
+		else
+			echo && echo "	已取消..." && echo
+		fi
+	else
+		echo -e "当前已是最新版本[ ${sh_new_ver} ] !"
+		sleep 5s
+	fi
+}
 
 #主菜单
 start_menu(){
@@ -293,7 +313,8 @@ echo -e "
  ${Green_font_prefix}6.${Font_color_suffix} 添加 RealM 转发规则
  ${Green_font_prefix}7.${Font_color_suffix} 查看 RealM 转发规则
  ${Green_font_prefix}8.${Font_color_suffix} 删除 RealM 转发规则
- ${Green_font_prefix}9.${Font_color_suffix} 退出脚本"
+ ${Green_font_prefix}9.${Font_color_suffix} 退出脚本
+ ${Green_font_prefix}0.${Font_color_suffix} 更新脚本"
  check_status
 
 read -p " 请输入数字后[1-6] 按回车键:" num
@@ -324,6 +345,9 @@ case "$num" in
 	;;
 	9)
 	exit 1
+	;;
+	0)
+	Update_Shell
 	;;
 	*)	
 	clear
