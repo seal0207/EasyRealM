@@ -319,7 +319,7 @@ echo -e "
  ${Green_font_prefix}0.${Font_color_suffix} 更新脚本"
  check_status
 
-read -p " 请输入数字后[1-6] 按回车键:" num
+read -p " 请输入数字后[0-9] 按回车键:" num
 case "$num" in
 	1)
 	Install_RealM
