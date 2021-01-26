@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
 
-sh_ver="1.0.1"
+sh_ver="1.0.2"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -63,7 +63,7 @@ systemctl enable --now realm
         `rm -rf "$(pwd)"/realm.service`
         `rm -rf "$(pwd)"/config.json`
     fi
-sleep 5s
+sleep 3s
 start_menu
 }
 
@@ -75,7 +75,7 @@ Uninstall_RealM(){
     echo "------------------------------"
     echo -e "-------${Green_font_prefix} RealM卸载成功! ${Font_color_suffix}-------"
     echo "------------------------------"
-    sleep 5s
+    sleep 3s
     start_menu
 }
 #启动RealM
@@ -84,17 +84,17 @@ Start_RealM(){
     echo "------------------------------"
     echo -e "-------${Green_font_prefix} RealM启动成功! ${Font_color_suffix}-------"
     echo "------------------------------"
-    sleep 5s
+    sleep 3s
     start_menu
 }
 
 #停止RealM
 Stop_RealM(){
-    `systemctl start realm`
+    `systemctl stop realm`
     echo "------------------------------"
     echo -e "-------${Green_font_prefix} RealM停止成功! ${Font_color_suffix}-------"
     echo "------------------------------"
-    sleep 5s
+    sleep 3s
     start_menu
 }
 
@@ -104,7 +104,7 @@ Restart_RealM(){
     echo "------------------------------"
     echo -e "-------${Green_font_prefix} RealM重动成功! ${Font_color_suffix}-------"
     echo "------------------------------"
-    sleep 5s
+    sleep 3s
     start_menu
 }
 
@@ -291,7 +291,7 @@ Update_Shell(){
 		fi
 	else
 		echo -e "当前已是最新版本[ ${sh_new_ver} ] !"
-		sleep 5s
+		sleep 3s
 	fi
 }
 
@@ -302,7 +302,7 @@ echo
 echo "#############################################################"
 echo "#                 RealM 一键脚本  By :Seal0207              #"
 echo "#############################################################"
-echo
+echo -e "公告：$(curl -L -s --connect-timeout 3 https://raw.githubusercontent.com/seal0207/EasyRealM/main/notice)"
 echo -e "
  当前版本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
  ${Green_font_prefix}1.${Font_color_suffix} 安装 RealM
