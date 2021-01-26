@@ -233,7 +233,7 @@ Check_RealM(){
     do
         trans_conf=$(sed -n "${i}p" $raw_conf_path)
         eachconf_retrieve
-        echo -e " $i  |$listening_ports\t|$remote_addresses:$remote_ports"
+        echo -e " $i  |  $listening_ports\t|$remote_addresses:$remote_ports"
         echo -e "--------------------------------------------------------"
     done
 read -p "输入任意键按回车返回主菜单"
