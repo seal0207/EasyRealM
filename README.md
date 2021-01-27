@@ -19,7 +19,7 @@ v1.0.0 RealM一键脚本问世
 
 通过测试RealM针对个人用户效果不错，目前转发端口数量多了后会出问题。
 
-![image](https://mxpic.ml/2021/01/23/20210123_704052f0f88df.png)
+![image](https://mxpic.ml/2021/01/27/20210127_70aaa42eb7fe2.png)
 ## 使用方法
 一键脚本：
 `wget -N --no-check-certificate https://git.io/realm.sh && chmod +x realm.sh && ./realm.sh`
