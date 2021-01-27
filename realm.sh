@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
 
-sh_ver="1.0.2"
+sh_ver="1.0.3"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -69,6 +69,7 @@ start_menu
 
 #卸载RealM
 Uninstall_RealM(){
+    if test -o /etc/realm/realm -o /etc/systemd/system/realm.service -o /etc/realm/config.json;then
     sleep 2s
     `rm -rf /etc/realm`
     `rm -rf /etc/systemd/system/realm.service`
@@ -77,35 +78,58 @@ Uninstall_RealM(){
     echo "------------------------------"
     sleep 3s
     start_menu
+    else
+    echo -e "-------${Red_font_prefix}RealM没有安装,卸载个锤子！${Font_color_suffix}-------"
+    sleep 3s
+    start_menu
+    fi
 }
 #启动RealM
 Start_RealM(){
+    if test -a /etc/realm/realm -a /etc/systemd/system/realm.service -a /etc/realm/config.json;then
     `systemctl start realm`
     echo "------------------------------"
     echo -e "-------${Green_font_prefix} RealM启动成功! ${Font_color_suffix}-------"
     echo "------------------------------"
     sleep 3s
     start_menu
+    else
+    echo -e "-------${Red_font_prefix}RealM没有安装,启动个锤子！${Font_color_suffix}-------"    
+    sleep 3s
+    start_menu
+    fi
 }
 
 #停止RealM
 Stop_RealM(){
+    if test -a /etc/realm/realm -a /etc/systemd/system/realm.service -a /etc/realm/config.json;then
     `systemctl stop realm`
     echo "------------------------------"
     echo -e "-------${Green_font_prefix} RealM停止成功! ${Font_color_suffix}-------"
     echo "------------------------------"
     sleep 3s
     start_menu
+    else
+    echo -e "-------${Red_font_prefix}RealM没有安装,停止个锤子！${Font_color_suffix}-------"    
+    sleep 3s
+    start_menu
+    fi
 }
 
 #重启RealM
 Restart_RealM(){
+    if test -a /etc/realm/realm -a /etc/systemd/system/realm.service -a /etc/realm/config.json;then
     `systemctl restart realm`
     echo "------------------------------"
-    echo -e "-------${Green_font_prefix} RealM重动成功! ${Font_color_suffix}-------"
+    echo -e "-------${Green_font_prefix} RealM重启成功! ${Font_color_suffix}-------"
     echo "------------------------------"
     sleep 3s
     start_menu
+    else
+    echo -e "-------${Red_font_prefix}RealM没有安装,重启个锤子！${Font_color_suffix}-------"    
+    sleep 3s
+    start_menu
+    fi
 }
 
 #设置本地监听端口
@@ -295,6 +319,70 @@ Update_Shell(){
 	fi
 }
 
+#备份配置
+Backup(){
+	if test -a /etc/realm/rawconf;then
+	cp /etc/realm/rawconf /etc/realm/rawconf.back
+	echo -e " ${Green_font_prefix}备份完成！${Font_color_suffix}"
+	sleep 2s
+	start_menu
+	else
+	echo -e " ${Red_font_prefix}未找到配置文件，备份失败${Font_color_suffix}"
+	sleep 2s
+	start_menu
+	fi
+}
+
+#恢复配置
+Recovey(){
+	if test -a /etc/realm/rawconf.back;then
+	rm -f /etc/realm/rawconf
+	cp /etc/realm/rawconf.back /etc/realm/rawconf
+	echo -e " ${Green_font_prefix}恢复完成！${Font_color_suffix}"
+	sleep 2s
+	start_menu
+	else
+	echo -e " ${Red_font_prefix}未找到备份文件，备份失败${Font_color_suffix}"
+	sleep 2s
+	start_menu
+	fi
+}
+
+#备份/恢复配置
+Backup_Recovey(){
+clear
+echo -e "
+ ${Green_font_prefix}1.${Font_color_suffix} 备份配置
+ ${Green_font_prefix}2.${Font_color_suffix} 恢复配置
+ ${Green_font_prefix}3.${Font_color_suffix} 删除备份"
+echo
+ read -p " 请输入数字后[1-2] 按回车键:" num2
+ case "$num2" in
+	1)
+     Backup
+	;;
+	2)
+     Recovey 
+	;;
+	3)
+     if test -a /etc/realm/rawconf.back;then
+     rm -f /etc/realm/rawconf.back
+	echo -e " ${Green_font_prefix}删除成功！${Font_color_suffix}"
+	sleep 2s
+	start_menu
+	else
+	echo -e " ${Red_font_prefix}未找到备份文件，删除失败${Font_color_suffix}"	
+	sleep 2s
+	start_menu
+	fi
+	;;
+	*)
+	esac
+	echo -e "${Error}:请输入正确数字 [1-2] 按回车键"
+	sleep 2s
+	Backup_Recovey
+}
+
 #主菜单
 start_menu(){
 clear
@@ -305,21 +393,22 @@ echo "#############################################################"
 echo -e "公告：$(curl -L -s --connect-timeout 3 https://raw.githubusercontent.com/seal0207/EasyRealM/main/notice)"
 echo -e "
  当前版本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+ ${Green_font_prefix}0.${Font_color_suffix} 更新脚本
  ${Green_font_prefix}1.${Font_color_suffix} 安装 RealM
  ${Green_font_prefix}2.${Font_color_suffix} 卸载 RealM
-————————————
+——————————————
  ${Green_font_prefix}3.${Font_color_suffix} 启动 RealM
  ${Green_font_prefix}4.${Font_color_suffix} 停止 RealM
  ${Green_font_prefix}5.${Font_color_suffix} 重启 RealM
-————————————
+——————————————
  ${Green_font_prefix}6.${Font_color_suffix} 添加 RealM 转发规则
  ${Green_font_prefix}7.${Font_color_suffix} 查看 RealM 转发规则
  ${Green_font_prefix}8.${Font_color_suffix} 删除 RealM 转发规则
  ${Green_font_prefix}9.${Font_color_suffix} 退出脚本
- ${Green_font_prefix}0.${Font_color_suffix} 更新脚本"
+${Green_font_prefix}10.${Font_color_suffix} 备份/恢复配置"
  check_status
 
-read -p " 请输入数字后[0-9] 按回车键:" num
+read -p " 请输入数字后[0-10] 按回车键:" num
 case "$num" in
 	1)
 	Install_RealM
@@ -351,9 +440,12 @@ case "$num" in
 	0)
 	Update_Shell
 	;;
+	10)
+	Backup_Recovey
+	;;
 	*)	
 	clear
-	echo -e "${Error}:请输入正确数字 [1-6] 按回车键"
+	echo -e "${Error}:请输入正确数字 [0-10] 按回车键"
 	sleep 2s
 	start_menu
 	;;
