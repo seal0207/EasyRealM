@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
 
-sh_ver="1.0.3"
+sh_ver="1.0.4"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -25,8 +25,25 @@ check_status(){
 
 #安装RealM
 Install_RealM(){
-mkdir /etc/realm
-wget -N --no-check-certificate https://github.com/zhboner/realm/releases/download/v1.2.0/realm && chmod +x realm && mv realm /etc/realm
+  if test -a /etc/realm/realm -a /etc/systemd/system/realm.service -a /etc/realm/config.json;then
+  echo "≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡"
+  echo -e "≡≡≡≡≡≡ ${Green_font_prefix}RealM已安装~ ${Font_color_suffix}≡≡≡≡≡≡"
+  echo "≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡"
+  sleep 2s
+  start_menu
+  fi
+  echo -e "#############################################################"
+  echo -e "#    请选择下载点:  1.国外   2.国内                          #"
+  echo -e "#############################################################"
+  read -p "请选择(默认国外): " download
+  [[ -z ${download} ]] && download="1"
+  if [[ ${download} == [2] ]]; then
+  mkdir /etc/realm
+  wget -N --no-check-certificate https://recordaily.com/soft/realm && chmod +x realm && mv realm /etc/realm
+  else
+  mkdir /etc/realm
+  wget -N --no-check-certificate https://github.com/zhboner/realm/releases/download/v1.2.0/realm && chmod +x realm && mv realm /etc/realm
+  fi
 echo '
 {
     "listening_addresses": ["0.0.0.0"],
@@ -383,6 +400,34 @@ echo
 	Backup_Recovey
 }
 
+#查看RealM状态
+Status_RealM(){
+  systemctl status realm
+  read -p "输入任意键按回车返回主菜单"
+  start_menu
+}
+
+#删除RealM配置
+Rewrite_RealM(){
+  rm -rf /etc/realm/rawconf
+  rm -rf /etc/realm/config
+  read -p "删除成功,输入任意键按回车返回主菜单"
+  start_menu
+}
+
+#重载RealM配置
+Reload_RealM(){
+  rm -rf /etc/realm/config
+  start_conf
+  localport_conf
+  addresses_conf
+  remoteport_conf
+  end
+  systemctl restart realm
+  read -p "重载配置成功,输入任意键按回车返回主菜单"
+  start_menu
+}
+
 #主菜单
 start_menu(){
 clear
@@ -397,9 +442,9 @@ echo -e "
  ${Green_font_prefix}1.${Font_color_suffix} 安装 RealM
  ${Green_font_prefix}2.${Font_color_suffix} 卸载 RealM
 ——————————————
- ${Green_font_prefix}3.${Font_color_suffix} 启动 RealM
- ${Green_font_prefix}4.${Font_color_suffix} 停止 RealM
- ${Green_font_prefix}5.${Font_color_suffix} 重启 RealM
+ ${Green_font_prefix}3.${Font_color_suffix} 启动 RealM        ${Green_font_prefix}x.${Font_color_suffix} 查看 RealM 状态 
+ ${Green_font_prefix}4.${Font_color_suffix} 停止 RealM        ${Green_font_prefix}y.${Font_color_suffix} 删除 RealM 配置 (如果配置错误启动失败，不知所措执行此项后重新配置)
+ ${Green_font_prefix}5.${Font_color_suffix} 重启 RealM        ${Green_font_prefix}z.${Font_color_suffix} 重载 RealM 配置 (手动修改/etc/realm/rawconf内容进行配置)
 ——————————————
  ${Green_font_prefix}6.${Font_color_suffix} 添加 RealM 转发规则
  ${Green_font_prefix}7.${Font_color_suffix} 查看 RealM 转发规则
@@ -408,7 +453,8 @@ echo -e "
 ${Green_font_prefix}10.${Font_color_suffix} 备份/恢复配置"
  check_status
 
-read -p " 请输入数字后[0-10] 按回车键:" num
+read -p " 请输入数字后[0-10] 按回车键:
+" num
 case "$num" in
 	1)
 	Install_RealM
@@ -419,12 +465,21 @@ case "$num" in
 	3)
 	Start_RealM
 	;;
+	x)
+	Status_RealM
+	;;
 	4)
 	Stop_RealM
 	;;
+	y)
+	Rewrite_RealM
+	;;	
 	5)
 	Restart_RealM
 	;;
+	z)
+	Reload_RealM
+	;;		
 	6)
 	Add_RealM
 	;;
