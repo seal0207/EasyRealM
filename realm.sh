@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
 
-sh_ver="1.0.4"
+sh_ver="1.0.5"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -428,6 +428,67 @@ Reload_RealM(){
   start_menu
 }
 
+#定时重启任务
+Time_Task(){
+  clear
+  echo -e "#############################################################"
+  echo -e "#                       RealM定时重启任务                   #"
+  echo -e "#############################################################" 
+  echo -e    
+  echo -e "${Green_font_prefix}1.配置RealM定时重启任务${Font_color_suffix}"
+  echo -e "${Red_font_prefix}2.删除RealM定时重启任务${Font_color_suffix}"
+  read -p "请选择: " numtype
+  if [ "$numtype" == "1" ]; then  
+  echo -e "请选择定时重启任务类型:"
+  echo -e "1.分钟 2.小时 3.天" 
+  read -p "请输入类型:
+  " type_num
+  case "$type_num" in
+	1)
+  echo -e "请设置每多少分钟重启Realm任务"	
+  read -p "请设置分钟数:
+  " type_m
+  echo "*/$type_m * * * * systemctl restart realm" >> /var/spool/cron/crontabs/root
+  systemctl restart cron 
+	;;
+	2)
+  echo -e "请设置每多少小时重启Realm任务"	
+  read -p "请设置小时数:
+  " type_h
+  echo "* */$type_h * * * systemctl restart realm" >> /var/spool/cron/crontabs/root
+  systemctl restart cron
+	;;
+	3)
+  echo -e "请设置每多少分钟重启Realm任务"	
+  read -p "请设置天数:
+  " type_m
+  echo "* * */$type_d * * systemctl restart realm" >> /var/spool/cron/crontabs/root
+  systemctl restart cron
+	;;
+	*)
+	clear
+	echo -e "${Error}:请输入正确数字 [1-3] 按回车键"
+	sleep 2s
+	Time_Task
+	;;
+  esac
+  echo -e "${Green_font_prefix}设置成功!任务已重启完成~${Font_color_suffix}"	
+  echo -e "${Red_font_prefix}注意：该重启任务测试环境为debian9,其他系统暂不清楚情况,请根据具体情况自行进行重启任务配置.不会请去百度~${Font_color_suffix}"	
+  read -p "输入任意键按回车返回主菜单"
+  start_menu   
+  elif [ "$numtype" == "2" ]; then
+  sed -i "/realm/d" /var/spool/cron/crontabs/root
+  systemctl restart cron
+  echo -e "${Green_font_prefix}定时重启任务删除完成！${Font_color_suffix}"
+  read -p "输入任意键按回车返回主菜单"
+  start_menu    
+  else
+  echo "输入错误，请重新输入！"
+  sleep 2s
+  Time_Task
+  fi  
+}
+
 #主菜单
 start_menu(){
 clear
@@ -450,10 +511,11 @@ echo -e "
  ${Green_font_prefix}7.${Font_color_suffix} 查看 RealM 转发规则
  ${Green_font_prefix}8.${Font_color_suffix} 删除 RealM 转发规则
  ${Green_font_prefix}9.${Font_color_suffix} 退出脚本
-${Green_font_prefix}10.${Font_color_suffix} 备份/恢复配置"
+${Green_font_prefix}10.${Font_color_suffix} 备份/恢复配置
+${Green_font_prefix}11.${Font_color_suffix} 添加定时重启任务(因Realm存在软件暴毙情况,添加定时任务是必要的！重启也就1秒,确保转发正常运行！)"
  check_status
 
-read -p " 请输入数字后[0-10] 按回车键:
+read -p " 请输入数字后[0-11] 按回车键:
 " num
 case "$num" in
 	1)
@@ -498,9 +560,12 @@ case "$num" in
 	10)
 	Backup_Recovey
 	;;
+	11)
+	Time_Task
+	;;	
 	*)	
 	clear
-	echo -e "${Error}:请输入正确数字 [0-10] 按回车键"
+	echo -e "${Error}:请输入正确数字 [0-11] 按回车键"
 	sleep 2s
 	start_menu
 	;;
