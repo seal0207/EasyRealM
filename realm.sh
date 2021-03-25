@@ -448,7 +448,7 @@ Time_Task(){
   echo -e "请设置每多少分钟重启Realm任务"	
   read -p "请设置分钟数:
   " type_m
-  echo "0/$type_m * * * * /usr/bin/systemctl restart realm" >> /var/spool/cron/crontabs/root
+  echo "* $type_m * * * ?  /usr/bin/systemctl restart realm" >> /var/spool/cron/crontabs/root
   sync /var/spool/cron/crontabs/root
   systemctl restart cron 
 	;;
@@ -456,15 +456,15 @@ Time_Task(){
   echo -e "请设置每多少小时重启Realm任务"	
   read -p "请设置小时数:
   " type_h
-  echo "0 0/$type_h * * * /usr/bin/systemctl restart realm" >> /var/spool/cron/crontabs/root
+  echo "0 0 */$type_h * * ? * /usr/bin/systemctl restart realm" >> /var/spool/cron/crontabs/root
   sync /var/spool/cron/crontabs/root
   systemctl restart cron
 	;;
 	3)
-  echo -e "请设置每多少分钟重启Realm任务"	
+  echo -e "请设置每多少天重启Realm任务"	
   read -p "请设置天数:
-  " type_m
-  echo "0 0 0/$type_d * * /usr/bin/systemctl restart realm" >> /var/spool/cron/crontabs/root
+  " type_d
+  echo "0 0 $type_d * * ? /usr/bin/systemctl restart realm" >> /var/spool/cron/crontabs/root
   sync /var/spool/cron/crontabs/root
   systemctl restart cron
 	;;
