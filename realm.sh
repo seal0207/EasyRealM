@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
 
-sh_ver="1.0.5"
+sh_ver="1.0.6"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -33,17 +33,40 @@ Install_RealM(){
   start_menu
   fi
   echo -e "#############################################################"
-  echo -e "#    请选择下载点:  1.国外   2.国内                          #"
+  echo -e "#    请选择下载点:  1.国外   2.国内                         #"
   echo -e "#############################################################"
   read -p "请选择(默认国外): " download
   [[ -z ${download} ]] && download="1"
   if [[ ${download} == [2] ]]; then
+  echo -e "#############################################################"
+  echo -e "#                     请选择下载版本:                       #"  
+  echo -e "#    1.（1.2.1为修复断流版）   2.（1.2.1原作者最后一版）    #"
+  echo -e "#############################################################"
+  read -p "请选择(默认为1.2.1修复断流版): " version
+  [[ -z ${version} ]] && version="1"
+  if [[ ${version} == [2] ]]; then  
   mkdir /etc/realm
-  wget -N --no-check-certificate https://recordaily.com/soft/realm && chmod +x realm && mv realm /etc/realm
+  wget -N --no-check-certificate https://recordaily.com/soft/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
   else
   mkdir /etc/realm
-  wget -N --no-check-certificate https://github.com/zhboner/realm/releases/download/v1.2.0/realm && chmod +x realm && mv realm /etc/realm
+  wget -N --no-check-certificate https://recordaily.com/soft/realm1.2.1 && chmod +x realm1.2.1 && mv realm1.2.1 /etc/realm/realm
+  fi  
+  else
+  echo -e "#############################################################"
+  echo -e "#                     请选择下载版本:                       #"  
+  echo -e "#    1.（1.2.1为修复断流版）   2.（1.2.1原作者最后一版）    #"
+  echo -e "#############################################################"
+  read -p "请选择(默认为1.2.1修复断流版): " version
+  [[ -z ${version} ]] && version="1"
+  if [[ ${version} == [2] ]]; then  
+  mkdir /etc/realm
+  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
+  else
+  mkdir /etc/realm
+  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.1 && chmod +x realm1.2.1 && mv realm1.2.1 /etc/realm/realm  
   fi
+  fi
+  
 echo '
 {
     "listening_addresses": ["0.0.0.0"],
