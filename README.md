@@ -1,4 +1,6 @@
 # EasyRealM 一键脚本 小白必备
+v1.0.7 在@Soniccube 大佬的反馈下，修复realm.service服务导致的断流。
+
 v1.0.6 添加 https://github.com/Soniccube 大佬的修复断流版，目前测下来配置不超过十个同时并发运行，还算稳定。
 
 V1.0.5 增加RealM重启功能，因RealM自身问题,发现RealM 5-8小时会暴毙一次。
