@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 clear
@@ -60,10 +60,10 @@ Install_RealM(){
   [[ -z ${version} ]] && version="1"
   if [[ ${version} == [2] ]]; then  
   mkdir /etc/realm
-  wget -N --no-check-certificate https://ghproxy.com/https://github.com/seal0207/EasyRealM/raw/main/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
+  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
   else
   mkdir /etc/realm
-  wget -N --no-check-certificate https://ghproxy.com/https://github.com/seal0207/EasyRealM/raw/main/realm1.2.2 && chmod +x realm1.2.2 && mv realm1.2.2 /etc/realm/realm  
+  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.2 && chmod +x realm1.2.2 && mv realm1.2.2 /etc/realm/realm  
   fi
   fi
   
