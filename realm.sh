@@ -60,10 +60,10 @@ Install_RealM(){
   [[ -z ${version} ]] && version="1"
   if [[ ${version} == [2] ]]; then  
   mkdir /etc/realm
-  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
+  wget -N --no-check-certificate https://ghproxy.com/https://github.com/seal0207/EasyRealM/raw/main/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
   else
   mkdir /etc/realm
-  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.2 && chmod +x realm1.2.2 && mv realm1.2.2 /etc/realm/realm  
+  wget -N --no-check-certificate https://ghproxy.com/https://github.com/seal0207/EasyRealM/raw/main/realm1.2.2 && chmod +x realm1.2.2 && mv realm1.2.2 /etc/realm/realm  
   fi
   fi
   
@@ -341,14 +341,14 @@ start_menu
 #更新脚本
 Update_Shell(){
 	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
-	sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
+	sh_new_ver=$(wget --no-check-certificate -qO- "https://ghproxy.com/https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && start_menu
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
 		read -p "(默认: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
-			wget -N --no-check-certificate https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm.sh
+			wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm.sh && chmod +x realm.sh
 			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
 		else
 			echo && echo "	已取消..." && echo
@@ -522,7 +522,7 @@ echo
 echo "#############################################################"
 echo "#                 RealM 一键脚本  By :Seal0207              #"
 echo "#############################################################"
-echo -e "公告：$(curl -L -s --connect-timeout 3 https://raw.githubusercontent.com/seal0207/EasyRealM/main/notice)"
+echo -e "公告：$(curl -L -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/seal0207/EasyRealM/main/notice)"
 echo -e "
  当前版本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
  ${Green_font_prefix}0.${Font_color_suffix} 更新脚本
