@@ -40,13 +40,13 @@ Install_RealM(){
   if [[ ${download} == [2] ]]; then
   echo -e "#############################################################"
   echo -e "#                     请选择下载版本:                       #"  
-  echo -e "#    1.（1.2.2为修复断流版）   2.（1.2.0原作者最后一版）    #"
+  echo -e "#    1.（1.2.2为修复断流版）   2.（1.4原作者最后一版）    #"
   echo -e "#############################################################"
   read -p "请选择(默认为1.2.1修复断流版): " version
   [[ -z ${version} ]] && version="1"
   if [[ ${version} == [2] ]]; then  
   mkdir /etc/realm
-  wget -N --no-check-certificate https://recordaily.com/soft/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
+  wget -N --no-check-certificate https://recordaily.com/soft/realm1.4 && chmod +x realm1.4 && mv realm1.4 /etc/realm/realm
   else
   mkdir /etc/realm
   wget -N --no-check-certificate https://recordaily.com/soft/realm1.2.2 && chmod +x realm1.2.2 && mv realm1.2.2 /etc/realm/realm
@@ -54,7 +54,7 @@ Install_RealM(){
   else
   echo -e "#############################################################"
   echo -e "#                     请选择下载版本:                       #"  
-  echo -e "#    1.（1.2.2为修复断流版）   2.（1.2.0原作者最后一版）    #"
+  echo -e "#    1.（1.2.2为修复断流版）   2.（1.4原作者最后一版）    #"
   echo -e "#############################################################"
   read -p "请选择(默认为1.2.2修复断流版): " version
   [[ -z ${version} ]] && version="1"
@@ -63,7 +63,7 @@ Install_RealM(){
   wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.0 && chmod +x realm1.2.0 && mv realm1.2.0 /etc/realm/realm
   else
   mkdir /etc/realm
-  wget -N --no-check-certificate https://github.com/seal0207/EasyRealM/raw/main/realm1.2.2 && chmod +x realm1.2.2 && mv realm1.2.2 /etc/realm/realm  
+  wget -N --no-check-certificate https://raw.githubusercontent.com/seal0207/EasyRealM/main/realm1.4 && chmod +x realm1.4 && mv realm1.4 /etc/realm/realm  
   fi
   fi
   
