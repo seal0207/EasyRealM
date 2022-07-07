@@ -1,4 +1,6 @@
 # EasyRealM 一键脚本 小白必备
+Realm2 脚本撰写中
+
 v1.0.7 在@Soniccube 大佬的反馈下，修复realm.service服务导致的断流。
 
 v1.0.6 添加 https://github.com/Soniccube 大佬的修复断流版，目前测下来配置不超过十个同时并发运行，还算稳定。
