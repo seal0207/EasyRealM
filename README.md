@@ -1,5 +1,5 @@
 # EasyRealM 一键脚本 小白必备
-Realm2 脚本撰写中
+Realm2 脚本已写好。请自测
 
 v1.0.7 在@Soniccube 大佬的反馈下，修复realm.service服务导致的断流。
 
